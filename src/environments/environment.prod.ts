@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+   production: true,
+   api: {
+      baseUrl: "http://localhost:3030/",
+      mediaManagementUrl: "http://localhost:4030/"
+   }
 };
