@@ -1,0 +1,78 @@
+<div class="content-header">
+   <div class="container-fluid">
+      <div class="row mb-2">
+         <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Guide Form</h1>
+         </div>
+         <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+               <li class="breadcrumb-item active">Guide Form</li>
+            </ol>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="content">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card">
+               <div class="card-header"></div>
+               <div class="card-body">
+                  <form [formGroup]="guideForm">
+                     <div class="col-md-6">
+                        <div class="col-md-4 form-group">
+                           <label class="form-label" for="id">* Title</label>
+                           <input
+                              class="form-control"
+                              type="text"
+                              formControlName="title"
+                              id="title"
+                              pInputText
+                              placeholder="* Title"
+                              [ngClass]="{
+                                 'is-invalid':
+                                    gf_title.invalid && gf_title.dirty
+                              }"
+                           />
+                           <div *ngIf="gf_title.invalid && gf_title.dirty">
+                              <span
+                                 class="help-block is-invalid"
+                                 *ngIf="gf_title.errors.required"
+                                 >Title is required</span
+                              >
+                           </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                           <label class="form-label" for="id">* Intro</label>
+                           <input
+                              class="form-control"
+                              type="text"
+                              formControlName="intro"
+                              id="intro"
+                              pInputText
+                              placeholder="* Intro"
+                              [ngClass]="{
+                                 'is-invalid':
+                                    gf_intro.invalid && gf_intro.dirty
+                              }"
+                           />
+                           <div *ngIf="gf_intro.invalid && gf_intro.dirty">
+                              <span
+                                 class="help-block is-invalid"
+                                 *ngIf="gf_intro.errors.required"
+                                 >Intro is required</span
+                              >
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6"></div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

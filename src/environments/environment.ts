@@ -5,9 +5,10 @@
 export const environment = {
    production: false,
    api: {
-      baseUrl: "http://localhost:3030/",
-      mediaManagementUrl: "http://localhost:4030/"
-   }
+      baseUrl: "http://localhost:3030",
+      mediaManagementUrl: "http://localhost:4030"
+   },
+   tokenName: "dev-modulearn-token"
 };
 
 /*

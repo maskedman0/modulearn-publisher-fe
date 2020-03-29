@@ -1,0 +1,100 @@
+<div class="login-box">
+   <div class="card">
+      <div class="login-logo">
+         <a href="#">
+            <img
+               src="https://409460.smushcdn.com/1274373/wp-content/uploads/2017/11/sample-logo.png?lossy=1&strip=1&webp=1"
+               alt=""
+               srcset=""
+            />
+         </a>
+      </div>
+      <div class="card-body login-card-body">
+         <form [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()">
+            <div class="form-group">
+               <input
+                  pInputText
+                  type="email"
+                  formControlName="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Email"
+                  [ngClass]="{
+                     'is-invalid':
+                        lf_email.invalid && lf_email.dirty && submitted
+                  }"
+               />
+               <span
+                  class="glyphicon glyphicon-envelope form-control-feedback"
+               ></span>
+               <div *ngIf="lf_email.invalid && lf_email.dirty && submitted">
+                  <span
+                     class="help-block is-invalid"
+                     *ngIf="!!lf_email.errors.required"
+                     >Email is required</span
+                  >
+                  <span
+                     class="help-block is-invalid"
+                     *ngIf="!!lf_email.errors.email"
+                     >Invalid email</span
+                  >
+               </div>
+            </div>
+
+            <div class="form-group">
+               <input
+                  type="password"
+                  pPassword
+                  formControlName="password"
+                  class="form-control"
+                  placeholder="Password"
+                  [ngClass]="{
+                     'is-invalid':
+                        lf_password.invalid && lf_password.dirty && submitted
+                  }"
+               />
+               <span
+                  class="glyphicon glyphicon-lock form-control-feedback"
+               ></span>
+               <div
+                  *ngIf="lf_password.invalid && lf_password.dirty && submitted"
+               >
+                  <span
+                     class="help-block is-invalid"
+                     *ngIf="!!lf_password.errors.required"
+                     >Password is required</span
+                  >
+                  <span
+                     class="help-block is-invalid"
+                     *ngIf="!!lf_password.errors.minlength"
+                     >Password must be atleast 8 characters in length</span
+                  >
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-12">
+                  <button
+                     type="submit"
+                     [disabled]="loading.show"
+                     class="btn btn-primary btn-block"
+                  >
+                     <span *ngIf="loading.show; else notLoadingTxt"
+                        >Please wait...</span
+                     >
+                     <ng-template #notLoadingTxt>Sign In</ng-template>
+                  </button>
+               </div>
+               <!-- /.col -->
+            </div>
+         </form>
+
+         <br />
+
+         <p class="mb-1" style="text-align: center;">
+            <a (click)="loginFormPopulate()">Forgot your password?</a>
+         </p>
+      </div>
+      <!-- /.login-card-body -->
+   </div>
+</div>
+<!-- /.login-box -->
