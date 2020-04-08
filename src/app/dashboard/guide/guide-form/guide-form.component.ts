@@ -77,16 +77,4 @@ export class GuideFormComponent implements OnInit {
    get gf_previewMedia(): FormGroup {
       return this.guideForm.get("previewMedia") as FormGroup;
    }
-   get gf_previewMedia_mediaType(): FormControl {
-      return this.gf_previewMedia.get("mediaType") as FormControl;
-   }
-   get gf_previewMedia_mediaUrl(): FormControl {
-      return this.gf_previewMedia.get("mediaUrl") as FormControl;
-   }
-   get gf_previewMedia_publicId(): FormControl {
-      return this.gf_previewMedia.get("publicId") as FormControl;
-   }
-   get gf_previewMedia_input(): FormControl {
-      return this.gf_previewMedia.get("input") as FormControl;
-   }
 }
