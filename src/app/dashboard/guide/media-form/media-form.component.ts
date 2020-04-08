@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
+import { FileUploadService } from '@shared/service/file-upload.service';
+import { UploadedFile } from '@shared/interfaces/uploaded-file.interface';
 
 @Component({
    selector: "app-media-form",
@@ -8,33 +10,62 @@ import { FormGroup, FormControl } from "@angular/forms";
 })
 export class MediaFormComponent implements OnInit {
    @Input() mediaForm: FormGroup;
-   uploading = false;
+   isUploading = false;
    file: File = null;
+   fileUrl = null;
 
-   constructor() {}
+   constructor(private fileUploadService: FileUploadService) {}
 
    ngOnInit(): void {}
 
-   /**
-    * on file drop handler
-    */
    onFileDropped(files: Array<File>) {
-      this.prepareFile(files);
+      if (files.length > 0) {
+         this.uploadFile(files);
+      }
    }
 
-   /**
-    * handle file from browsing
-    */
    fileBrowseHandler(files: Array<File>) {
-      this.prepareFile(files);
+      if (files.length > 0) {
+         this.uploadFile(files);
+      }
    }
 
-   /**
-    * Convert Files list to normal array list
-    * @param files (Files List)
-    */
-   prepareFile(files: Array<File>) {
+   uploadFile(files: Array<File>) {
       this.file = files[0];
+
+      const mimeType = files[0].type;
+      if (mimeType.match(/image\/*/) == null) {
+         window.alert('Only images are supported.');
+         return;
+      }
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = () => {
+         this.fileUrl = reader.result;
+         this.isUploading = true;
+      };
+
+
+      const formData = new FormData();
+      formData.append("screen", this.file, this.file.name);
+
+      this.fileUploadService
+         .uploadSingle(formData)
+         .then((result: UploadedFile) => {
+            this.mediaFormPopulate(result);
+         })
+         .finally(() => {
+            this.isUploading = false;
+            this.fileUrl = null;
+         });
+   }
+
+   mediaFormPopulate(uploaded: UploadedFile): void {
+      this.mf_mediaType.setValue(uploaded.mediaType);
+      this.mf_mediaUrl.setValue(uploaded.mediaUrl);
+      this.mf_publicId.setValue(uploaded.publicId);
+      this.mf_input.setValue(uploaded.publicId);
    }
 
    get mf_mediaType(): FormControl {
