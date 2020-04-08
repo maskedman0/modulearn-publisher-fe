@@ -5,6 +5,7 @@ import {
    Validators,
    FormControl
 } from "@angular/forms";
+import { SelectItem } from "primeng/api/selectitem";
 
 @Component({
    selector: "app-guide-form",
@@ -13,6 +14,18 @@ import {
 })
 export class GuideFormComponent implements OnInit {
    guideForm: FormGroup = undefined;
+   difficultyOptions: SelectItem[] = [
+      { label: "Easy", value: "easy" },
+      { label: "Intermediate", value: "intermediate" },
+      { label: "Advanced", value: "advanced" }
+   ];
+
+   unitOptions: SelectItem[] = [
+      { label: "Minutes", value: "minute" },
+      { label: "Hours", value: "hour" },
+      { label: "Days", value: "day" },
+      { label: "Weeks", value: "week" }
+   ];
 
    constructor(private fb: FormBuilder) {}
 
@@ -24,15 +37,15 @@ export class GuideFormComponent implements OnInit {
       this.guideForm = this.fb.group({
          title: ["", Validators.required],
          intro: ["", Validators.required],
-         difficulty: ["", Validators.required],
+         difficulty: ["easy", Validators.required],
          estimatedCompletion: this.fb.group({
-            timeNum: [1, Validators.required],
+            timeNum: [null, Validators.required],
             unit: ["hour", Validators.required]
          }),
          previewMedia: this.fb.group({
-            mediaType: [{ value: "", disabled: true }, Validators.required],
-            mediaUrl: [{ value: "", disabled: true }, Validators.required],
-            publicId: [{ value: "", disabled: true }, Validators.required],
+            mediaType: [null, Validators.required],
+            mediaUrl: [null, Validators.required],
+            publicId: [null, Validators.required],
             input: [null, Validators.required]
          }),
          steps: this.fb.array([]),
