@@ -13,7 +13,7 @@ import { Title } from "@angular/platform-browser";
          <app-footer></app-footer>
       </div>
    `,
-   styles: []
+   styles: [``]
 })
 export class DashboardComponent implements OnInit {
    constructor(private title: Title) {}
@@ -29,5 +29,6 @@ export class DashboardComponent implements OnInit {
       body.classList.add("sidebar-mini");
       body.classList.add("layout-fixed");
       body.classList.add("layout-navbar-fixed");
+      body.classList.add("sidebar-collapse");
    }
 }
