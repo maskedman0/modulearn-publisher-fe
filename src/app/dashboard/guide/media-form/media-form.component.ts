@@ -57,15 +57,16 @@ export class MediaFormComponent implements OnInit {
          })
          .finally(() => {
             this.isUploading = false;
-            this.fileUrl = null;
          });
    }
 
    mediaFormPopulate(uploaded: UploadedFile): void {
-      this.mf_mediaType.setValue(uploaded.mediaType);
-      this.mf_mediaUrl.setValue(uploaded.mediaUrl);
-      this.mf_publicId.setValue(uploaded.publicId);
-      this.mf_input.setValue(uploaded.publicId);
+      this.mediaForm.patchValue({
+         mediaType: uploaded.mediaType,
+         mediaUrl: uploaded.mediaUrl,
+         publicId: uploaded.publicId,
+         input: uploaded.publicId
+      });
    }
 
    get mf_mediaType(): FormControl {

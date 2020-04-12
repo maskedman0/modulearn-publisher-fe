@@ -3,13 +3,13 @@
 	<div *ngIf="!isUploading; else uploading;">
 
 		<div *ngIf="mf_mediaUrl.value; else readyForUpload;">
-			<img [src]="mf_mediaUrl.value" [alt]="mf_publicId.value">
+			<img [src]="fileUrl" [alt]="mf_publicId.value">
 		</div>
 
 		<ng-template #readyForUpload>
-			<input formControlName="input" type="file" #fileDropRef id="fileDropRef" single (change)="fileBrowseHandler($event.target.files)" />
+			<input type="file" #fileDropRef id="fileDropRef" single (change)="fileBrowseHandler($event.target.files)" />
 			<svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
-				<g fill="#3B454F" fill-rule="nonzero">
+				<g fill="#555" fill-rule="nonzero">
 					<path
 						d="M42.656 15.135a1.953 1.953 0 0 1-1.391-.578L31.5 4.795l-9.765 9.762a1.97 1.97 0 1 1-2.785-2.785L30.106.616a1.97 1.97 0 0 1 2.785 0l11.157 11.156a1.97 1.97 0 0 1-1.392 3.363z" />
 					<path
@@ -30,7 +30,7 @@
 	<ng-template #uploading>
 
 		<div class="img-uploading-container">
-			<h3 class="centered"><i class="pi pi-spin pi-spinner" style="font-size: 6em"></i></h3>
+			<p-progressSpinner class="centered" [style]="{width: '80px', height: '80px'}" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
 			<img *ngIf="fileUrl" class="img-preview" [src]="fileUrl">
 		</div>
 
