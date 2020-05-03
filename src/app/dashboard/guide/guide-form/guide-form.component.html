@@ -43,30 +43,24 @@
                      <div class="row ui-fluid">
                         <div class="form-group col-12">
                            <label class="form-label" for="title">* Title</label>
-                           <input
-                              type="text"
-                              pInputText
-                              formControlName="title"
-                              id="title"
+                           <input type="text" pInputText formControlName="title" id="title"
                               placeholder="Guide title (e.g. Batter mixing)"
-                              [ngClass]="{ 'is-invalid': gf_title.invalid && gf_title.dirty }"/>
+                              [ngClass]="{ 'is-invalid': gf_title.invalid && gf_title.dirty }" />
 
                            <div *ngIf="gf_title.invalid && gf_title.dirty">
-                              <span class="help-block is-invalid" *ngIf="gf_title.errors.required" >Title is required</span>
+                              <span class="help-block is-invalid" *ngIf="gf_title.errors.required">Title is
+                                 required</span>
                            </div>
                         </div>
 
                         <div class="form-group col-12">
                            <label class="form-label" for="intro">* Intro</label>
-                           <input
-                              type="text"
-                              formControlName="intro"
-                              id="intro"
-                              pInputText
+                           <input type="text" formControlName="intro" id="intro" pInputText
                               placeholder="A short intro for the readers of this guide."
                               [ngClass]="{ 'is-invalid': gf_intro.invalid && gf_intro.dirty }" />
                            <div *ngIf="gf_intro.invalid && gf_intro.dirty">
-                              <span class="help-block is-invalid" *ngIf="gf_intro.errors.required" >Intro is required</span>
+                              <span class="help-block is-invalid" *ngIf="gf_intro.errors.required">Intro is
+                                 required</span>
                            </div>
                         </div>
 
@@ -75,14 +69,12 @@
                               <div class="form-group col-12 col-md-6">
                                  <label class="form-label" for="difficulty">* Difficulty</label>
                                  <br />
-                                 <p-dropdown
-                                    placeholder="How difficult is this guide?"
-                                    [options]="difficultyOptions"
-                                    id="difficulty"
-                                    formControlName="difficulty"></p-dropdown>
+                                 <p-dropdown placeholder="How difficult is this guide?" [options]="difficultyOptions"
+                                    id="difficulty" formControlName="difficulty"></p-dropdown>
 
                                  <div *ngIf="gf_difficulty.invalid && gf_difficulty.dirty">
-                                    <span class="help-block is-invalid" *ngIf="gf_difficulty.errors.required">Difficulty is required</span>
+                                    <span class="help-block is-invalid" *ngIf="gf_difficulty.errors.required">Difficulty
+                                       is required</span>
                                  </div>
                               </div>
                            </div>
@@ -93,30 +85,28 @@
                                  <label class="form-label" for="timeNum">* Estimated Time of Completion</label>
                                  <div class="row">
                                     <div class="form-group col-7">
-                                       <input
-                                          type="number"
-                                          formControlName="timeNum"
-                                          id="timeNum"
-                                          pInputText
+                                       <input type="number" formControlName="timeNum" id="timeNum" pInputText
                                           placeholder="e.g. 1"
-                                          [ngClass]="{ 'is-invalid': gf_estimatedCompletion_timeNum.invalid && gf_estimatedCompletion_timeNum.dirty }"/>
-                                       
-                                       <div *ngIf="gf_estimatedCompletion_timeNum.invalid && gf_estimatedCompletion_timeNum.dirty">
-                                          <span class="help-block is-invalid" *ngIf="gf_estimatedCompletion_timeNum.errors.required">Time is required</span>
+                                          [ngClass]="{ 'is-invalid': gf_estimatedCompletion_timeNum.invalid && gf_estimatedCompletion_timeNum.dirty }" />
+
+                                       <div
+                                          *ngIf="gf_estimatedCompletion_timeNum.invalid && gf_estimatedCompletion_timeNum.dirty">
+                                          <span class="help-block is-invalid"
+                                             *ngIf="gf_estimatedCompletion_timeNum.errors.required">Time is
+                                             required</span>
                                        </div>
 
                                     </div>
                                     <div class="form-group col-5">
-                                       <p-dropdown
-                                          placeholder="How difficult is this guide?"
-                                          [options]="unitOptions"
-                                          id="unit"
-                                          formControlName="unit"></p-dropdown>
+                                       <p-dropdown placeholder="How difficult is this guide?" [options]="unitOptions"
+                                          id="unit" formControlName="unit"></p-dropdown>
 
-                                       <div *ngIf="gf_estimatedCompletion_unit.invalid && gf_estimatedCompletion_unit.dirty">
-                                          <span class="help-block is-invalid" *ngIf="gf_estimatedCompletion_unit.errors.required">Unit is required</span>
+                                       <div
+                                          *ngIf="gf_estimatedCompletion_unit.invalid && gf_estimatedCompletion_unit.dirty">
+                                          <span class="help-block is-invalid"
+                                             *ngIf="gf_estimatedCompletion_unit.errors.required">Unit is required</span>
                                        </div>
-                                       
+
                                     </div>
                                  </div>
                               </div>
@@ -133,7 +123,15 @@
             </div>
             <div class="card-body">
                <div class="row">
+                  <div class="col-12" formArrayName="steps">
+                     <div *ngFor="let guideStep of gf_steps.controls; let i = index;">
+                        <app-guide-step-form [guideStepForm]="guideStep" [index]="i"></app-guide-step-form>
+                     </div>
+                  </div>
                </div>
+            </div>
+            <div class="card-footer">
+               <button type="button" class="btn btn-primary" (click)="addBuideStep()">Add</button>
             </div>
          </div>
          <div class="card">
